@@ -19,6 +19,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
+    "plugin:react-redux/recommended",
     "plugin:promise/recommended",
     "plugin:sonarjs/recommended",
     "plugin:jsx-a11y/recommended",
@@ -33,6 +34,7 @@
   "plugins": [
     "@typescript-eslint",
     "react-hooks",
+    "react-redux",
     "promise",
     "sonarjs",
     "jsx-a11y",
