@@ -13,6 +13,7 @@ const SearchInput = styled.input.attrs({
   width: 100%;
   height: 40px;
   padding: 0 70px 0 15px;
+  color: inherit;
   font-size: 1.5rem;
   border: none;
   border-radius: 19px / 50%;
@@ -41,6 +42,7 @@ const ClearBtn = styled.button.attrs({
   /* Additional pixel for the correct alignment of the button in the center */
   top: calc(50% + 1px);
   right: 45px;
+  color: inherit;
   transform: translateY(-50%);
 `;
 
@@ -74,9 +76,6 @@ const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
   width: 100%;
   max-width: 760px;
   color: #2d2d2d;
-  > * {
-    color: inherit;
-  }
 `;
 
 export { Search };
