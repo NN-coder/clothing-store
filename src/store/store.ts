@@ -4,12 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { rootReducer } from '../reducers/rootReducer';
 import { State } from '../types/state';
-import { initialState } from './initialState';
 
-const store: Store<State> = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+const store: Store<State> = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export { store };

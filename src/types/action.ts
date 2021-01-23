@@ -1,1 +1,4 @@
-export type Action<T = undefined> = { type: string; value?: T };
+export interface Action<V, T extends string = string> {
+  type: T;
+  value: V;
+}

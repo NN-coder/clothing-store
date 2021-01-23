@@ -2,7 +2,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { State } from '../../types/state';
-import { setSearchText } from '../../actions';
+import { setSearchText } from '../../actions/searchActions';
 import { Search, Props as SearchProps } from './Search';
 
 const mapStateToProps = (state: State): Pick<SearchProps, 'searchValue'> => ({

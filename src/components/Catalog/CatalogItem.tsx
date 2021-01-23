@@ -11,6 +11,10 @@ const ItemLink = styled.a`
   font-size: 1.4rem;
   row-gap: 10px;
 `;
+const ItemImg = styled.img`
+  width: 100%;
+  object-fit: cover;
+`;
 const ItemTitle = styled.p`
   height: 45px;
   line-height: 20px;
@@ -29,7 +33,7 @@ const CatalogItem: React.FC<Props> = ({ title, price, img }) => {
     <article style={{ position: 'relative' }}>
       <ItemLink href="/" aria-label={`${title}; Price: ${itemPrice}`}>
         <LazyLoad once offset={100}>
-          <img alt="" src={img} />
+          <ItemImg alt="" src={img} />
         </LazyLoad>
         <ItemTitle>{title}</ItemTitle>
         <ItemPrice>{itemPrice}</ItemPrice>
