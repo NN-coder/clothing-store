@@ -38,7 +38,7 @@ const Header = styled(({ className }: Props) => (
   </IconContext.Provider>
 ))`
   padding: 10px 0;
-  background-color: #2d2d2d;
+  background-color: var(--standard-color);
 `;
 
 export { Header };

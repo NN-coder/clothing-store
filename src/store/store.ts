@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-underscore-dangle */
-import { createStore, Store } from 'redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, Store } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { rootReducer } from '../reducers/rootReducer';
-import { State } from '../types';
+import { State } from '../types/state';
 import { initialState } from './initialState';
 
 const store: Store<State> = createStore(
   rootReducer,
   initialState,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 export { store };

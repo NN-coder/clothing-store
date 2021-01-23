@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
+import { HashRouter } from 'react-router-dom';
 
 import { store } from './store/store';
 import { App } from './components/App';
@@ -19,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
   :root {
     font-size: 10px;
     font-family: 'Roboto', sans-serif;
+
+    --standard-color: #2d2d2d;
   }
   a {
     color: inherit;
@@ -37,8 +40,10 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <GlobalStyle />
-      <App />
+      <HashRouter>
+        <GlobalStyle />
+        <App />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

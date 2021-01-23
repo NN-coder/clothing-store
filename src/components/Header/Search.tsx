@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 
-import { Action } from '../../types';
+import { Action } from '../../types/action';
 
 const SearchInput = styled.input.attrs({
   type: 'search',
@@ -75,7 +75,7 @@ const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
   position: relative;
   width: 100%;
   max-width: 760px;
-  color: #2d2d2d;
+  color: var(--standard-color);
 `;
 
 export { Search };

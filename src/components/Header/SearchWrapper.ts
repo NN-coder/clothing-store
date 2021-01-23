@@ -1,7 +1,7 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { State } from '../../types';
+import { State } from '../../types/state';
 import { setSearchText } from '../../actions';
 import { Search, Props as SearchProps } from './Search';
 
