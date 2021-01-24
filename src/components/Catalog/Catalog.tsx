@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
@@ -20,8 +21,10 @@ export interface Props {
 
 const Catalog: React.FC<Props> = ({ catalog, fetchCatalog }) => {
   useEffect(() => {
-    fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
-  }, [fetchCatalog]);
+    if (catalog.status === 'loading') {
+      fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
+    }
+  }, []);
 
   return (
     <section>

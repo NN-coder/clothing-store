@@ -4,12 +4,14 @@ import { IconContext } from 'react-icons/lib';
 
 import { SearchWrapper } from './SearchWrapper';
 import { HeaderButtons } from './HeaderButtons';
+import { HeaderNav } from './HeaderNav';
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1350px;
+  height: 65px;
   margin: 0 auto;
 `;
 const Logo = styled.h1`
@@ -31,13 +33,13 @@ const Header = styled(({ className }: Props) => (
         <Logo>
           <a href="/">Store</a>
         </Logo>
+        <HeaderNav />
         <SearchWrapper />
         <HeaderButtons />
       </HeaderContainer>
     </header>
   </IconContext.Provider>
 ))`
-  padding: 10px 0;
   background-color: var(--standard-color);
 `;
 
