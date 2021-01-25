@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
 
-import { CatalogItem as Product } from '../../types/catalog';
+import { ProductsItem } from '../../types/products';
 
 const ItemLink = styled.a`
   display: flex;
@@ -24,7 +24,7 @@ const ItemPrice = styled.p`
   font-size: 1.5rem;
 `;
 
-export type Props = Pick<Product, 'title' | 'price' | 'img'>;
+export type Props = Pick<ProductsItem, 'title' | 'price' | 'img'>;
 
 const CatalogItem: React.FC<Props> = ({ title, price, img }) => {
   const itemPrice = `$${price.toFixed(2)}`;
@@ -32,7 +32,7 @@ const CatalogItem: React.FC<Props> = ({ title, price, img }) => {
   return (
     <article style={{ position: 'relative' }}>
       <ItemLink href="/" aria-label={`${title}; Price: ${itemPrice}`}>
-        <LazyLoad once offset={100}>
+        <LazyLoad offset={100} height={400}>
           <ItemImg alt="" src={img} />
         </LazyLoad>
         <ItemTitle>{title}</ItemTitle>

@@ -1,9 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
-
-import { Action } from '../../types/action';
 
 const SearchInput = styled.input.attrs({
   type: 'search',
@@ -19,7 +17,7 @@ const SearchInput = styled.input.attrs({
   border-radius: 19px / 50%;
 `;
 
-const SearchIcon = styled.div<{ highlighting: boolean }>`
+const SearchBtn = styled.button<{ highlighting: boolean }>`
   position: absolute;
   top: 0;
   right: -1px;
@@ -48,27 +46,42 @@ const ClearBtn = styled.button.attrs({
 
 export interface Props {
   searchValue: string;
-  setSearchValue: (text: string) => Action<string>;
+  setSearchValue: (text: string) => void;
   className?: string;
 }
 
 const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
-  const handleChange = useCallback(
-    ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value),
-    [setSearchValue]
+  const [localSearchValue, setLocalSearchValue] = useState(searchValue);
+
+  const handleInputChange = useCallback(
+    ({ target }: React.ChangeEvent<HTMLInputElement>) => setLocalSearchValue(target.value),
+    []
   );
+
+  const handleClearBtnClick = useCallback(() => {
+    setLocalSearchValue('');
+    setSearchValue('');
+  }, [setSearchValue]);
 
   return (
     <div className={className}>
-      <SearchInput value={searchValue} onChange={handleChange} />
-      {searchValue.length !== 0 && (
-        <ClearBtn onClick={() => setSearchValue('')}>
+      <SearchInput
+        value={localSearchValue}
+        onChange={handleInputChange}
+        onKeyPress={({ code }) => code === 'Enter' && setSearchValue(localSearchValue)}
+      />
+      {localSearchValue.length !== 0 && (
+        <ClearBtn onClick={handleClearBtnClick}>
           <MdClose size="24px" />
         </ClearBtn>
       )}
-      <SearchIcon highlighting={searchValue.length !== 0}>
+      <SearchBtn
+        type="button"
+        highlighting={localSearchValue.length !== 0}
+        onClick={() => setSearchValue(localSearchValue)}
+      >
         <FiSearch />
-      </SearchIcon>
+      </SearchBtn>
     </div>
   );
 })`

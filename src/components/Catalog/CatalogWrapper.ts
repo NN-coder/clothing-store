@@ -1,32 +1,43 @@
-/* eslint-disable react-redux/connect-prefer-named-arguments */
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { State } from '../../types/state';
-import { CatalogState } from '../../types/catalog';
+import { Catalog as CatalogState } from '../../types/catalog';
+import { Filters } from '../../types/filters';
 import { fetchCatalog } from '../../actions/catalogActions';
+import { filterByGender } from '../../actions/filterActions';
 import { Catalog, Props as CatalogProps } from './Catalog';
 
-const filterByGender = (catalog: CatalogState, gender: 'male' | 'female'): CatalogState => {
+const getFilteredCatalog = (catalog: CatalogState, filters: Filters): CatalogState => {
   if (catalog.status === 'success') {
-    const { value } = catalog;
-    return { ...catalog, value: value.filter((item) => item.gender === gender) };
+    let filteredCatalog = catalog.fetchResult;
+
+    filteredCatalog = filteredCatalog.filter(({ title }) =>
+      title.toLowerCase().includes(filters.byTitle.toLowerCase())
+    );
+
+    if (filters.byGender) {
+      filteredCatalog = filteredCatalog.filter(({ gender }) => gender === filters.byGender);
+    }
+
+    return { ...catalog, fetchResult: filteredCatalog };
   }
 
   return catalog;
 };
 
-const getMapStateToProps = (gender: 'male' | 'female') => {
-  return ({ catalog }: State): Pick<CatalogProps, 'catalog'> => ({
-    catalog: filterByGender(catalog, gender),
-  });
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): Pick<CatalogProps, 'fetchCatalog'> => ({
-  fetchCatalog: bindActionCreators(fetchCatalog, dispatch),
+const mapStateToProps = ({ catalog, filters }: State): Pick<CatalogProps, 'catalog'> => ({
+  catalog: getFilteredCatalog(catalog, filters),
 });
 
-const MensCatalog = connect(getMapStateToProps('male'), mapDispatchToProps)(Catalog);
-const WomensCatalog = connect(getMapStateToProps('female'), mapDispatchToProps)(Catalog);
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): Pick<CatalogProps, 'fetchCatalog' | 'filterByGender'> => ({
+  fetchCatalog: bindActionCreators(fetchCatalog, dispatch),
+  filterByGender: bindActionCreators(filterByGender, dispatch),
+});
+
+const MensCatalog = connect(mapStateToProps, mapDispatchToProps)(Catalog);
+const WomensCatalog = connect(mapStateToProps, mapDispatchToProps)(Catalog);
 
 export { MensCatalog, WomensCatalog };

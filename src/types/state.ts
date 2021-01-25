@@ -1,6 +1,7 @@
-import { CatalogState } from './catalog';
+import { Catalog } from './catalog';
+import { Filters } from './filters';
 
 export interface State {
-  searchText: string;
-  catalog: CatalogState;
+  catalog: Catalog;
+  filters: Filters;
 }

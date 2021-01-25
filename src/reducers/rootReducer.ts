@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { searchReducer } from './searchReducer';
 import { catalogReducer } from './catalogReducer';
+import { filtersReducer } from './filtersReducer';
 
 const rootReducer = combineReducers({
-  searchText: searchReducer,
   catalog: catalogReducer,
+  filters: filtersReducer,
 });
 
 export { rootReducer };

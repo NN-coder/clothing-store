@@ -1,25 +1,18 @@
 import { Reducer } from 'redux';
 
-import {
-  FETCH_CATALOG_SUCCESS,
-  FETCH_CATALOG_FAILURE,
-  CatalogActions,
-} from '../actions/catalogActions';
-import { CatalogState } from '../types/catalog';
+import { CatalogActions } from '../actions/catalogActions';
+import { Catalog } from '../types/catalog';
 
-const initialState: CatalogState = { status: 'loading', value: null };
+const initialState: Catalog = { status: 'loading', fetchResult: null };
 
-const catalogReducer: Reducer<CatalogState, CatalogActions> = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_CATALOG_FAILURE:
-      return { status: 'failure', value: action.value };
+const catalogReducer: Reducer<Catalog, CatalogActions> = (state = initialState, action) => {
+  if (action.type === 'FETCH_CATALOG_FAILURE')
+    return { status: 'failure', fetchResult: action.payload };
 
-    case FETCH_CATALOG_SUCCESS:
-      return { status: 'success', value: action.value };
+  if (action.type === 'FETCH_CATALOG_SUCCESS')
+    return { status: 'success', fetchResult: action.payload };
 
-    default:
-      return state;
-  }
+  return state;
 };
 
 export { catalogReducer };

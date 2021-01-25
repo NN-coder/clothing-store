@@ -2,15 +2,15 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { State } from '../../types/state';
-import { setSearchText } from '../../actions/searchActions';
+import { filterByTitle } from '../../actions/filterActions';
 import { Search, Props as SearchProps } from './Search';
 
 const mapStateToProps = (state: State): Pick<SearchProps, 'searchValue'> => ({
-  searchValue: state.searchText,
+  searchValue: state.filters.byTitle,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): Pick<SearchProps, 'setSearchValue'> => ({
-  setSearchValue: bindActionCreators(setSearchText, dispatch),
+  setSearchValue: bindActionCreators(filterByTitle, dispatch),
 });
 
 const SearchWrapper = connect(mapStateToProps, mapDispatchToProps)(Search);

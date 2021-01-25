@@ -1,4 +1,7 @@
-export interface Action<V, T extends string = string> {
+export interface ActionWithoutPayload<T extends string> {
   type: T;
-  value: V;
+}
+
+export interface Action<T extends string, P> extends ActionWithoutPayload<T> {
+  payload: P;
 }
