@@ -4,4 +4,5 @@ import { Filters } from './filters';
 export interface State {
   catalog: Catalog;
   filters: Filters;
+  savedItems: string[];
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 
-const Button = styled.button.attrs({
-  type: 'button',
-})`
+const HeaderLink = styled(Link)`
   color: white;
 `;
 
@@ -14,15 +13,15 @@ export interface Props {
 
 const HeaderButtons = styled(({ className }: Props) => (
   <div className={className}>
-    <Button aria-label="Bag">
+    <HeaderLink to="/" aria-label="Bag">
       <FaShoppingCart />
-    </Button>
-    <Button aria-label="Saved items ">
+    </HeaderLink>
+    <HeaderLink to="/saved-items" aria-label="Saved items ">
       <FaHeart />
-    </Button>
+    </HeaderLink>
   </div>
 ))`
-  button + button {
+  ${HeaderLink} + ${HeaderLink} {
     margin-left: 20px;
   }
 `;

@@ -7,17 +7,17 @@ type FetchCatalogFailureAction = Action<'FETCH_CATALOG_FAILURE', Error>;
 
 export type CatalogActions = FetchCatalogSuccessAction | FetchCatalogFailureAction;
 
-export const fetchCatalogSuccess = (catalog: Products): FetchCatalogSuccessAction => ({
+const fetchCatalogSuccess = (catalog: Products): FetchCatalogSuccessAction => ({
   type: 'FETCH_CATALOG_SUCCESS',
   payload: catalog,
 });
 
-export const fetchCatalogFailure = (error: Error): FetchCatalogFailureAction => ({
+const fetchCatalogFailure = (error: Error): FetchCatalogFailureAction => ({
   type: 'FETCH_CATALOG_FAILURE',
   payload: error,
 });
 
-export const fetchCatalog = (url: string) => {
+const fetchCatalog = (url: string) => {
   return (dispatch: Dispatch<CatalogActions>): void => {
     fetch(url)
       .then((res) => res.json())
@@ -25,3 +25,5 @@ export const fetchCatalog = (url: string) => {
       .catch((err: Error) => dispatch(fetchCatalogFailure(err)));
   };
 };
+
+export { fetchCatalogSuccess, fetchCatalogFailure, fetchCatalog };

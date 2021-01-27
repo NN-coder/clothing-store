@@ -14,29 +14,29 @@ export type FilterActions =
   | FilterByCategoryAction
   | FilterBySubcategoryAction;
 
-export const filterByTitle = (title: string): FilterByTitleAction => ({
+const filterByTitle = (title: string): FilterByTitleAction => ({
   type: 'FILTER_BY_TITLE',
   payload: title,
 });
 
-export const filterByPrice = (range: [number, number]): FilterByPriceAction => ({
+const filterByPrice = (range: [number, number]): FilterByPriceAction => ({
   type: 'FILTER_BY_PRICE',
   payload: range,
 });
 
-export const filterByGender = (gender: Gender | null): FilterByGenderAction => ({
+const filterByGender = (gender: Gender | null): FilterByGenderAction => ({
   type: 'FILTER_BY_GENDER',
   payload: gender,
 });
 
-export const filterByCategory = (category: Category | null): FilterByCategoryAction => ({
+const filterByCategory = (category: Category | null): FilterByCategoryAction => ({
   type: 'FILTER_BY_CATEGORY',
   payload: category,
 });
 
-export const filterBySubcategory = (
-  subcategory: Subcategory | null
-): FilterBySubcategoryAction => ({
+const filterBySubcategory = (subcategory: Subcategory | null): FilterBySubcategoryAction => ({
   type: 'FILTER_BY_SUBCATEGORY',
   payload: subcategory,
 });
+
+export { filterByTitle, filterByPrice, filterByGender, filterByCategory, filterBySubcategory };
