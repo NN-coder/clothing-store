@@ -27,6 +27,7 @@ const AddToSavedItemsBtn = styled(
       [handleClick, handleFocus, handleBlur]
     );
 
+    // TODO: Add animation on click
     return (
       <button type="button" className={className} {...handlers}>
         {isAlreadyInSavedItemsList || isActive ? <BsHeartFill /> : <BsHeart />}
@@ -45,6 +46,9 @@ const AddToSavedItemsBtn = styled(
   &:hover,
   &:focus {
     box-shadow: 0 2px 4px 0 rgba(45, 45, 45, 0.14);
+  }
+  svg {
+    margin-top: 5px;
   }
 `;
 

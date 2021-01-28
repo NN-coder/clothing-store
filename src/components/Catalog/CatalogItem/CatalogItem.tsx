@@ -31,16 +31,17 @@ const ItemPrice = styled.p`
 export interface Props {
   product: ProductsItem;
   addToSavedItems: (product: string) => void;
+  className?: string;
 }
 
-const CatalogItem: React.FC<Props> = ({ product, addToSavedItems }) => {
+const CatalogItem = styled(({ product, addToSavedItems, className }: Props) => {
   const { price, title, img, id } = product;
   const itemPrice = `$${price.toFixed(2)}`;
 
   const savedItems = useContext(SavedItemsContext);
 
   return (
-    <article style={{ position: 'relative' }}>
+    <article className={className}>
       <ItemLink href="/" aria-label={`${title}; Price: ${itemPrice}`}>
         <LazyLoad offset={100} height={410}>
           <ItemImg alt="" src={img} />
@@ -55,6 +56,8 @@ const CatalogItem: React.FC<Props> = ({ product, addToSavedItems }) => {
       />
     </article>
   );
-};
+})`
+  position: relative;
+`;
 
 export { CatalogItem };

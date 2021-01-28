@@ -2,14 +2,13 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { IconContext } from 'react-icons';
 
 import { Catalog as CatalogState } from '../../types/catalog';
 import { Gender } from '../../types/products';
 import { CatalogItemWrapper } from './CatalogItem/CatalogItemWrapper';
 import { SavedItemsContext } from './savedItemsContext';
 
-const CatalogWrapper = styled.div`
+const CatalogContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 35px 20px;
@@ -34,18 +33,16 @@ const Catalog: React.FC<Props> = ({ catalog, fetchCatalog, filterByGender, saved
   }, [pathname, filterByGender, fetchCatalog, catalog.status]);
 
   return (
-    <IconContext.Provider value={{ size: '20px', style: { marginTop: '5px' } }}>
-      <SavedItemsContext.Provider value={savedItems}>
-        <section>
-          <CatalogWrapper>
-            {catalog.status === 'success' &&
-              catalog.fetchResult.map((product) => (
-                <CatalogItemWrapper key={product.id} product={product} />
-              ))}
-          </CatalogWrapper>
-        </section>
-      </SavedItemsContext.Provider>
-    </IconContext.Provider>
+    <SavedItemsContext.Provider value={savedItems}>
+      <section>
+        <CatalogContainer>
+          {catalog.status === 'success' &&
+            catalog.fetchResult.map((product) => (
+              <CatalogItemWrapper key={product.id} product={product} />
+            ))}
+        </CatalogContainer>
+      </section>
+    </SavedItemsContext.Provider>
   );
 };
 

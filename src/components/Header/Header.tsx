@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IconContext } from 'react-icons/lib';
 
 import { SearchWrapper } from './SearchWrapper';
 import { HeaderButtons } from './HeaderButtons';
@@ -27,18 +26,16 @@ export interface Props {
 }
 
 const Header = styled(({ className }: Props) => (
-  <IconContext.Provider value={{ size: '20px' }}>
-    <header className={className}>
-      <HeaderContainer>
-        <Logo>
-          <a href="/">Store</a>
-        </Logo>
-        <HeaderNav />
-        <SearchWrapper />
-        <HeaderButtons />
-      </HeaderContainer>
-    </header>
-  </IconContext.Provider>
+  <header className={className}>
+    <HeaderContainer>
+      <Logo>
+        <a href="/">Store</a>
+      </Logo>
+      <HeaderNav />
+      <SearchWrapper />
+      <HeaderButtons />
+    </HeaderContainer>
+  </header>
 ))`
   background-color: var(--standard-color);
 `;

@@ -17,7 +17,9 @@ const getFilteredCatalog = (catalog: Catalog, filters: Filters): Catalog => {
     }
 
     if (byPrice) {
-      const [min, max] = byPrice;
+      const min = byPrice[0] ?? -Infinity;
+      const max = byPrice[1] ?? Infinity;
+
       filteredCatalog = filteredCatalog.filter(({ price }) => price >= min && price <= max);
     }
 

@@ -10,8 +10,8 @@ const addToSavedItems = (productID: string): AddToSavedItemsAction => ({
   payload: productID,
 });
 
-const removeFromSavedItems = (productID: string): AddToSavedItemsAction => ({
-  type: 'ADD_TO_SAVED_ITEMS',
+const removeFromSavedItems = (productID: string): RemoveFromSavedItemsAction => ({
+  type: 'REMOVE_FROM_SAVED_ITEMS',
   payload: productID,
 });
 
