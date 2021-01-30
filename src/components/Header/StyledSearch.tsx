@@ -50,7 +50,7 @@ export interface Props {
   className?: string;
 }
 
-const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
+const Search: React.FC<Props> = ({ className, searchValue, setSearchValue }) => {
   const [localSearchValue, setLocalSearchValue] = useState(searchValue);
 
   const handleInputChange = useCallback(
@@ -68,7 +68,9 @@ const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
       <SearchInput
         value={localSearchValue}
         onChange={handleInputChange}
-        onKeyPress={({ code }) => code === 'Enter' && setSearchValue(localSearchValue)}
+        onKeyPress={({ code }) => {
+          if (code === 'Enter') setSearchValue(localSearchValue);
+        }}
       />
       {localSearchValue.length !== 0 && (
         <ClearBtn onClick={handleClearBtnClick}>
@@ -84,11 +86,13 @@ const Search = styled(({ className, searchValue, setSearchValue }: Props) => {
       </SearchBtn>
     </div>
   );
-})`
+};
+
+const StyledSearch = styled(Search)`
   position: relative;
   width: 100%;
   max-width: 760px;
   color: var(--standard-color);
 `;
 
-export { Search };
+export { StyledSearch };

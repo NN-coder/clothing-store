@@ -16,7 +16,7 @@ export interface Props {
   className?: string;
 }
 
-const Placeholder = styled(({ className }: Props) => (
+const Placeholder: React.FC<Props> = ({ className }) => (
   <div className={className}>
     <FaHeartBroken size={30} />
     <Title>You have no saved items</Title>
@@ -25,7 +25,9 @@ const Placeholder = styled(({ className }: Props) => (
       choose something for yourself.
     </Text>
   </div>
-))`
+);
+
+const StyledPlaceholder = styled(Placeholder)`
   display: flex;
   flex-direction: column;
   grid-column: 1 / -1;
@@ -38,4 +40,4 @@ const Placeholder = styled(({ className }: Props) => (
   row-gap: 20px;
 `;
 
-export { Placeholder };
+export { StyledPlaceholder };

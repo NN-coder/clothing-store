@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { SearchWrapper } from './SearchWrapper';
 import { HeaderButtons } from './HeaderButtons';
-import { HeaderNav } from './HeaderNav';
+import { StyledHeaderNav } from './StyledHeaderNav';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -25,19 +25,21 @@ export interface Props {
   className?: string;
 }
 
-const Header = styled(({ className }: Props) => (
+const Header: React.FC<Props> = ({ className }) => (
   <header className={className}>
     <HeaderContainer>
       <Logo>
         <a href="/">Store</a>
       </Logo>
-      <HeaderNav />
+      <StyledHeaderNav />
       <SearchWrapper />
       <HeaderButtons />
     </HeaderContainer>
   </header>
-))`
+);
+
+const StyledHeader = styled(Header)`
   background-color: var(--standard-color);
 `;
 
-export { Header };
+export { StyledHeader };

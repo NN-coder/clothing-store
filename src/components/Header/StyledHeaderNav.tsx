@@ -25,14 +25,16 @@ export interface Props {
   className?: string;
 }
 
-const HeaderNav = styled(({ className }: Props) => (
+const HeaderNav: React.FC<Props> = ({ className }) => (
   <nav className={className}>
     <NavigationLink to="/men">Men</NavigationLink>
     <NavigationLink to="/women">Women</NavigationLink>
   </nav>
-))`
+);
+
+const StyledHeaderNav = styled(HeaderNav)`
   display: flex;
   height: 100%;
 `;
 
-export { HeaderNav };
+export { StyledHeaderNav };

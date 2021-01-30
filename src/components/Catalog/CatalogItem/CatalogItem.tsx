@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import LazyLoad from 'react-lazyload';
 
 import { ProductsItem } from '../../../types/products';
-import { AddToSavedItemsBtn } from '../AddToSavedItemsBtn';
+import { StyledAddToSavedItemsBtn } from '../StyledAddToSavedItemsBtn';
 import { SavedItemsContext } from '../savedItemsContext';
 
 const ItemLink = styled.a`
@@ -31,33 +30,28 @@ const ItemPrice = styled.p`
 export interface Props {
   product: ProductsItem;
   addToSavedItems: (product: string) => void;
-  className?: string;
 }
 
-const CatalogItem = styled(({ product, addToSavedItems, className }: Props) => {
+const CatalogItem: React.FC<Props> = ({ product, addToSavedItems }) => {
   const { price, title, img, id } = product;
   const itemPrice = `$${price.toFixed(2)}`;
 
   const savedItems = useContext(SavedItemsContext);
 
   return (
-    <article className={className}>
+    <article style={{ position: 'relative' }}>
       <ItemLink href="/" aria-label={`${title}; Price: ${itemPrice}`}>
-        <LazyLoad offset={100} height={410}>
-          <ItemImg alt="" src={img} />
-        </LazyLoad>
+        <ItemImg alt="" src={img} />
         <ItemTitle>{title}</ItemTitle>
         <ItemPrice>{itemPrice}</ItemPrice>
       </ItemLink>
 
-      <AddToSavedItemsBtn
+      <StyledAddToSavedItemsBtn
         isAlreadyInSavedItemsList={savedItems?.includes(id)}
         handleClick={() => addToSavedItems(id)}
       />
     </article>
   );
-})`
-  position: relative;
-`;
+};
 
 export { CatalogItem };

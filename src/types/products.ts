@@ -4,7 +4,7 @@ type AccessoriesSubcategory = 'hats' | 'watches' | 'wallets' | 'sunglasses';
 
 export type Subcategory = ClothingSubcategory | ShoesSubcategory | AccessoriesSubcategory;
 export type Category = 'clothing' | 'shoes' | 'accessories';
-export type Gender = 'male' | 'female';
+export type Gender = 'men' | 'women';
 
 interface Item {
   category: Category;
@@ -13,6 +13,7 @@ interface Item {
   title: string;
   price: number;
   img: string;
+  color: string;
   id: string;
 }
 

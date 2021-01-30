@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Catalog } from '../../types/catalog';
-import { Placeholder } from './Placeholder';
-import { SavedItemsCard } from './SavedItemsCard';
+import { StyledPlaceholder } from './StyledPlaceholder';
+import { StyledSavedItemsCard } from './StyledSavedItemsCard';
 
 const Title = styled.h2`
   padding: 25px 0;
@@ -31,12 +31,12 @@ const SavedItems: React.FC<Props> = ({ catalog, savedItems, removeFromSavedItems
   <>
     <Title>Saved Items</Title>
     <SavedItemsInner>
-      {savedItems.length === 0 && <Placeholder />}
+      {savedItems.length === 0 && <StyledPlaceholder />}
       {catalog.status === 'success' &&
         catalog.fetchResult
           .filter(({ id }) => savedItems.includes(id))
           .map(({ id, ...product }) => (
-            <SavedItemsCard
+            <StyledSavedItemsCard
               key={id}
               removeFromSavedItems={() => removeFromSavedItems(id)}
               product={product}

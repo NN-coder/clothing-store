@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Catalog as CatalogState } from '../../types/catalog';
 import { Gender } from '../../types/products';
+import { FilterWrapper } from '../Filter/FilterWrapper';
 import { CatalogItemWrapper } from './CatalogItem/CatalogItemWrapper';
 import { SavedItemsContext } from './savedItemsContext';
 
@@ -24,25 +25,28 @@ export interface Props {
 }
 
 const Catalog: React.FC<Props> = ({ catalog, fetchCatalog, filterByGender, savedItems }) => {
-  const { pathname } = useLocation();
+  const { gender } = useParams<{ gender: Gender }>();
 
   useEffect(() => {
-    filterByGender(pathname === '/men' ? 'male' : 'female');
-
     if (catalog.status === 'loading') fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
-  }, [pathname, filterByGender, fetchCatalog, catalog.status]);
+
+    filterByGender(gender);
+  }, [gender, filterByGender, fetchCatalog, catalog.status]);
 
   return (
-    <SavedItemsContext.Provider value={savedItems}>
-      <section>
-        <CatalogContainer>
-          {catalog.status === 'success' &&
-            catalog.fetchResult.map((product) => (
-              <CatalogItemWrapper key={product.id} product={product} />
-            ))}
-        </CatalogContainer>
-      </section>
-    </SavedItemsContext.Provider>
+    <>
+      <FilterWrapper />
+      <SavedItemsContext.Provider value={savedItems}>
+        <section>
+          <CatalogContainer>
+            {catalog.status === 'success' &&
+              catalog.fetchResult.map((product) => (
+                <CatalogItemWrapper key={product.id} product={product} />
+              ))}
+          </CatalogContainer>
+        </section>
+      </SavedItemsContext.Provider>
+    </>
   );
 };
 

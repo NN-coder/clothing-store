@@ -5,14 +5,13 @@ import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 
 const HeaderLink = styled(Link)`
   color: white;
+  & + & {
+    margin-left: 20px;
+  }
 `;
 
-export interface Props {
-  className?: string;
-}
-
-const HeaderButtons = styled(({ className }: Props) => (
-  <div className={className}>
+const HeaderButtons: React.FC = () => (
+  <div>
     <HeaderLink to="/" aria-label="Bag">
       <FaShoppingCart />
     </HeaderLink>
@@ -20,10 +19,6 @@ const HeaderButtons = styled(({ className }: Props) => (
       <FaHeart />
     </HeaderLink>
   </div>
-))`
-  ${HeaderLink} + ${HeaderLink} {
-    margin-left: 20px;
-  }
-`;
+);
 
 export { HeaderButtons };

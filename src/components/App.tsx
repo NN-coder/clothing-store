@@ -2,17 +2,16 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { IconContext } from 'react-icons';
-import { Header } from './Header/Header';
+import { StyledHeader } from './Header/StyledHeader';
 import { CatalogWrapper } from './Catalog/CatalogWrapper';
 import { SavedItemsWrapper } from './SavedItems/SavedItemsWrapper';
 
 const App: React.FC = () => (
   <IconContext.Provider value={{ size: '20px' }}>
-    <Header />
+    <StyledHeader />
     <Switch>
-      <Route path="/men" component={CatalogWrapper} />
-      <Route path="/women" component={CatalogWrapper} />
       <Route path="/saved-items" component={SavedItemsWrapper} />
+      <Route path="/:gender" component={CatalogWrapper} />
       <Redirect from="/" to="/men" />
     </Switch>
   </IconContext.Provider>

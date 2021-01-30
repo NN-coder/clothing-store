@@ -1,5 +1,4 @@
 import React from 'react';
-import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 import { BsTrash } from 'react-icons/bs';
 
@@ -49,16 +48,14 @@ export interface Props {
   className?: string;
 }
 
-const SavedItemsCard = styled(({ className, product, removeFromSavedItems }: Props) => {
+const SavedItemsCard: React.FC<Props> = ({ className, product, removeFromSavedItems }) => {
   const { price, title, img } = product;
   const productPrice = `$${price.toFixed(2)}`;
 
   return (
     <article className={className}>
       <a href="/" aria-label={`${title}; Price: ${productPrice}`}>
-        <LazyLoad offset={100} height={410}>
-          <Img alt="" src={img} />
-        </LazyLoad>
+        <Img alt="" src={img} />
         <Title>{title}</Title>
         <Price>{productPrice}</Price>
       </a>
@@ -68,10 +65,12 @@ const SavedItemsCard = styled(({ className, product, removeFromSavedItems }: Pro
       </RemoveFromSavedItemsBtn>
     </article>
   );
-})`
+};
+
+const StyledSavedItemsCard = styled(SavedItemsCard)`
   position: relative;
   font-size: 1.4rem;
   letter-spacing: 0.05em;
 `;
 
-export { SavedItemsCard };
+export { StyledSavedItemsCard };
