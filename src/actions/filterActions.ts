@@ -1,6 +1,7 @@
-import { Action } from '../types/action';
+import { Action } from '../types/actions';
 import { SortBy } from '../types/filters';
 import { Category, Gender, Subcategory } from '../types/products';
+import { createActionCreator } from './createActionCreator';
 
 type SortAction = Action<'SORT', SortBy>;
 type FilterByTitleAction = Action<'FILTER_BY_TITLE', string>;
@@ -17,35 +18,12 @@ export type FilterActions =
   | FilterByCategoryAction
   | FilterBySubcategoryAction;
 
-const sort = (by: SortBy): SortAction => ({
-  type: 'SORT',
-  payload: by,
-});
-
-const filterByTitle = (title: string): FilterByTitleAction => ({
-  type: 'FILTER_BY_TITLE',
-  payload: title,
-});
-
-const filterByPrice = (range: [number, number]): FilterByPriceAction => ({
-  type: 'FILTER_BY_PRICE',
-  payload: range,
-});
-
-const filterByGender = (gender: Gender | null): FilterByGenderAction => ({
-  type: 'FILTER_BY_GENDER',
-  payload: gender,
-});
-
-const filterByCategory = (category: Category | null): FilterByCategoryAction => ({
-  type: 'FILTER_BY_CATEGORY',
-  payload: category,
-});
-
-const filterBySubcategory = (subcategory: Subcategory | null): FilterBySubcategoryAction => ({
-  type: 'FILTER_BY_SUBCATEGORY',
-  payload: subcategory,
-});
+const sort = createActionCreator<SortAction>('SORT');
+const filterByTitle = createActionCreator<FilterByTitleAction>('FILTER_BY_TITLE');
+const filterByPrice = createActionCreator<FilterByPriceAction>('FILTER_BY_PRICE');
+const filterByGender = createActionCreator<FilterByGenderAction>('FILTER_BY_GENDER');
+const filterByCategory = createActionCreator<FilterByCategoryAction>('FILTER_BY_CATEGORY');
+const filterBySubcategory = createActionCreator<FilterBySubcategoryAction>('FILTER_BY_SUBCATEGORY');
 
 export {
   sort,
