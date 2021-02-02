@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Catalog as CatalogState } from '../../types/catalog';
@@ -25,13 +25,15 @@ export interface Props {
 }
 
 const Catalog: React.FC<Props> = ({ catalog, fetchCatalog, filterByGender, savedItems }) => {
-  const { gender } = useParams<{ gender: Gender }>();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (catalog.status === 'loading') fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
+    if (catalog.status === 'loading' || catalog.status === 'failure') {
+      fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
+    }
 
-    filterByGender(gender);
-  }, [gender, filterByGender, fetchCatalog, catalog.status]);
+    filterByGender(pathname === '/men' ? 'men' : 'women');
+  }, [pathname, filterByGender, fetchCatalog, catalog.status]);
 
   return (
     <>

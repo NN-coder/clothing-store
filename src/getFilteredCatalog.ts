@@ -4,7 +4,7 @@ import { Filters } from './types/filters';
 const getFilteredCatalog = (catalog: Catalog, filters: Filters): Catalog => {
   if (catalog.status === 'success') {
     let filteredCatalog = catalog.fetchResult;
-    const { sortBy, byTitle, byGender, byPrice } = filters;
+    const { sortBy, byTitle, byGender, byPrice, byCategory } = filters;
 
     if (byTitle) {
       filteredCatalog = filteredCatalog.filter(({ title }) =>
@@ -23,6 +23,10 @@ const getFilteredCatalog = (catalog: Catalog, filters: Filters): Catalog => {
       const max = byPrice[1] ?? Infinity;
 
       filteredCatalog = filteredCatalog.filter(({ price }) => price >= min && price <= max);
+    }
+
+    if (byCategory) {
+      filteredCatalog = filteredCatalog.filter(({ category }) => category === byCategory);
     }
 
     if (sortBy === 'price_ascending') {

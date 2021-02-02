@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { FaAngleDown } from 'react-icons/fa';
 import { StyledDropdownMenu } from './StyledDropdownMenu';
@@ -14,24 +14,27 @@ const inactiveDropdownBtnStyles = css`
   border-top: 1px solid #ddd;
 `;
 
-const ToggleDropdownBtn = styled.button<{ active: boolean }>`
+const ToggleDropdownBtn = styled.button<{ isActive: boolean }>`
+  position: relative;
+  z-index: 10;
   width: 100%;
   height: 42px;
   padding: 0 5px;
   font-size: 1.6rem;
   text-align-last: left;
   border-bottom: 1px solid #ddd;
-  ${({ active }) => (active ? activeDropdownBtnStyles : inactiveDropdownBtnStyles)}
+  ${({ isActive }) => (isActive ? activeDropdownBtnStyles : inactiveDropdownBtnStyles)}
 `;
 // TODO: Figure out why the React throws a warning here
-const ArrowIcon = styled(FaAngleDown)<{ active: boolean }>`
+const ArrowIcon = styled(FaAngleDown)<{ isActive: boolean }>`
   position: absolute;
   top: 50%;
   right: 5px;
+  z-index: 5;
   width: 13px;
   height: 13px;
-  color: ${({ active }) => (active ? '#0770cf' : 'inherit')};
-  transform: translateY(-50%) ${({ active }) => (active ? 'rotate(0.5turn)' : '')};
+  color: ${({ isActive }) => (isActive ? '#0770cf' : 'inherit')};
+  transform: translateY(-50%) ${({ isActive }) => (isActive ? 'rotate(0.5turn)' : '')};
   cursor: pointer;
 `;
 
@@ -45,21 +48,42 @@ export interface Props {
 
 const FilterDropdown: React.FC<Props> = ({ btnText, className, listItems }) => {
   const [isOpen, toggleOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = useCallback(({ target }: MouseEvent) => {
+    if ((target as Element).closest('.filter-dropdown') !== ref.current) {
+      toggleOpen(false);
+    }
+  }, []);
+
+  const handleEscPress = useCallback(({ code }: KeyboardEvent) => {
+    if (code === 'Escape') toggleOpen(false);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('keyup', handleEscPress);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('keyup', handleEscPress);
+    };
+  }, [handleEscPress, handleOutsideClick]);
 
   const handleBtnClick = useCallback(() => toggleOpen((prevValue) => !prevValue), []);
 
   return (
-    <div className={className}>
+    <div className={`filter-dropdown ${className}`} ref={ref}>
       <ToggleDropdownBtn
         type="button"
-        active={isOpen}
+        isActive={isOpen}
         onClick={handleBtnClick}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
         {btnText}
       </ToggleDropdownBtn>
-      <ArrowIcon active={isOpen} />
+      <ArrowIcon isActive={isOpen} />
       <StyledDropdownMenu isOpen={isOpen} menuOptions={Object.entries(listItems)} />
     </div>
   );

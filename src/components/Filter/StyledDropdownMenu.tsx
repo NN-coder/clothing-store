@@ -64,7 +64,7 @@ const DropdownMenu: React.FC<Props> = ({ className, isOpen, menuOptions }) => {
 
 const StyledDropdownMenu = styled(DropdownMenu)`
   position: absolute;
-  z-index: 5;
+  z-index: 15;
   width: 350px;
   padding: 10px;
   background-color: #eee;

@@ -10,8 +10,9 @@ const App: React.FC = () => (
   <IconContext.Provider value={{ size: '20px' }}>
     <StyledHeader />
     <Switch>
+      <Route path="/men" component={CatalogWrapper} />
+      <Route path="/women" component={CatalogWrapper} />
       <Route path="/saved-items" component={SavedItemsWrapper} />
-      <Route path="/:gender" component={CatalogWrapper} />
       <Redirect from="/" to="/men" />
     </Switch>
   </IconContext.Provider>
