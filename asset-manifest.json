@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/clothing-store/static/js/main.e7160b75.chunk.js",
-    "main.js.map": "/clothing-store/static/js/main.e7160b75.chunk.js.map",
+    "main.js": "/clothing-store/static/js/main.c81818ab.chunk.js",
+    "main.js.map": "/clothing-store/static/js/main.c81818ab.chunk.js.map",
     "runtime-main.js": "/clothing-store/static/js/runtime-main.a8710fea.js",
     "runtime-main.js.map": "/clothing-store/static/js/runtime-main.a8710fea.js.map",
-    "static/js/2.6f950c58.chunk.js": "/clothing-store/static/js/2.6f950c58.chunk.js",
-    "static/js/2.6f950c58.chunk.js.map": "/clothing-store/static/js/2.6f950c58.chunk.js.map",
+    "static/js/2.63467666.chunk.js": "/clothing-store/static/js/2.63467666.chunk.js",
+    "static/js/2.63467666.chunk.js.map": "/clothing-store/static/js/2.63467666.chunk.js.map",
     "index.html": "/clothing-store/index.html",
-    "static/js/2.6f950c58.chunk.js.LICENSE.txt": "/clothing-store/static/js/2.6f950c58.chunk.js.LICENSE.txt"
+    "static/js/2.63467666.chunk.js.LICENSE.txt": "/clothing-store/static/js/2.63467666.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a8710fea.js",
-    "static/js/2.6f950c58.chunk.js",
-    "static/js/main.e7160b75.chunk.js"
+    "static/js/2.63467666.chunk.js",
+    "static/js/main.c81818ab.chunk.js"
   ]
 }
