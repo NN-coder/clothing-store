@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { FiSearch } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 

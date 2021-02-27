@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import { Catalog } from '../../types/catalog';
 import { StyledPlaceholder } from './StyledPlaceholder';

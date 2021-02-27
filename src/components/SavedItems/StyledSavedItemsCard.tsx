@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { BsTrash } from 'react-icons/bs';
 
 import { ProductsItem } from '../../types/products';

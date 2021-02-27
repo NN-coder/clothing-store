@@ -1,10 +1,7 @@
 import { ActionCreator, Action } from '../types/actions';
 
 function createActionCreator<A extends Action>(type: A['type']): ActionCreator<A> {
-  return (payload: A['payload']) => ({
-    type,
-    payload,
-  });
+  return Object.assign((payload: A['payload']) => ({ type, payload }), { type });
 }
 
 export { createActionCreator };

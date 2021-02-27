@@ -10,14 +10,6 @@ type FilterByGenderAction = Action<'FILTER_BY_GENDER', Gender | null>;
 type FilterByCategoryAction = Action<'FILTER_BY_CATEGORY', Category | null>;
 type FilterBySubcategoryAction = Action<'FILTER_BY_SUBCATEGORY', Subcategory | null>;
 
-export type FilterActions =
-  | SortAction
-  | FilterByTitleAction
-  | FilterByPriceAction
-  | FilterByGenderAction
-  | FilterByCategoryAction
-  | FilterBySubcategoryAction;
-
 const sort = createActionCreator<SortAction>('SORT');
 const filterByTitle = createActionCreator<FilterByTitleAction>('FILTER_BY_TITLE');
 const filterByPrice = createActionCreator<FilterByPriceAction>('FILTER_BY_PRICE');

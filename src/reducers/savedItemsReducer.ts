@@ -1,18 +1,22 @@
 import { Reducer } from 'redux';
-import { SavedItemsActions } from '../actions/savedItemsActions';
+import { addToSavedItems, removeFromSavedItems } from '../actions/savedItemsActions';
 
 const initialState: string[] = [];
 
-const savedItemsReducer: Reducer<string[], SavedItemsActions> = (state = initialState, action) => {
-  if (action.type === 'ADD_TO_SAVED_ITEMS') return Array.from(new Set([...state, action.payload]));
+const savedItemsReducer: Reducer<string[]> = (state = initialState, action) => {
+  switch (action.type) {
+    case addToSavedItems.type:
+      return Array.from(new Set([...state, action.payload]));
 
-  if (action.type === 'REMOVE_FROM_SAVED_ITEMS') {
-    const stateSet = new Set(state);
-    stateSet.delete(action.payload);
-    return Array.from(stateSet);
+    case removeFromSavedItems.type: {
+      const stateSet = new Set(state);
+      stateSet.delete(action.payload);
+      return Array.from(stateSet);
+    }
+
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export { savedItemsReducer };
