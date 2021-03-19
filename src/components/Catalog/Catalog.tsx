@@ -26,14 +26,16 @@ export interface Props {
 
 const Catalog: React.FC<Props> = ({ catalog, fetchCatalog, filterByGender, savedItems }) => {
   const { pathname } = useLocation();
-
+  
   useEffect(() => {
     if (catalog.status === 'loading' || catalog.status === 'failure') {
       fetchCatalog(`${process.env.PUBLIC_URL}/catalog.json`);
     }
-
+  }, [fetchCatalog, catalog.status]);
+  
+  useEffect(() => {
     filterByGender(pathname === '/men' ? 'men' : 'women');
-  }, [pathname, filterByGender, fetchCatalog, catalog.status]);
+  }, [pathname, filterByGender]);
 
   return (
     <>
